@@ -47,7 +47,7 @@ ul.contact {
   text-decoration: none;
 }
 
-.customnode {
+#nodesupport,#nodedirect,#finance,#tech,#hr,#comm,#children{
 	cursor: pointer;
 }
 #support {

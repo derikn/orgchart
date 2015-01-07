@@ -24,6 +24,7 @@
      <!--Google Charts -->
       <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["orgchart"]});
       google.setOnLoadCallback(drawChart);
@@ -41,18 +42,17 @@
         data3.addColumn('string', 'Manager');
         data3.addColumn('string', 'ToolTip');
         data.addRows([
-          [{v:'Membership', f:'<h2>Membership</h2><div id="board" style="font-style:italic">Board of Directors</div>'}, '', 'The President'],
+          [{v:'Membership', f:'<h2>Membership</h2><div style="font-style:italic">Board of Directors</div>'}, '', ''],
           [{v:'Support Services', f:'<h3>Support Services</h3><div id="nodesupport" style="font-style:italic">Tanya Sather<div>'}, 'Membership', ''],
-          [{v:'Direct Services', f:'<h3>Direct Services</h3><div id="nodedirect" style="font-style:italic">Richard Faucher<div>'}, 'Membership', ''],
-
+          [{v:'Direct Services', f:'<h3>Direct Services</h3><div id="nodedirect" style="font-style:italic">Richard Faucher<div>'}, 'Membership', ''], 
         ]);
         data2.addRows([
           [{v:'Support', f:'<h2>Support Services</h2><div style="font-style:italic"></div>'}, '', ''],
-          [{v:'Finance', f:'<h3>Finance</h3>'}, 'Support', ''],
-          [{v:'Social Innovation & Technology', f:'<h3>Social Innovation & Technology</h3>'}, 'Support', ''],
-          [{v:'HR & Quality Assurance', f:'<h3>HR & Quality Assurance</h3>'}, 'Support', ''],
-          [{v:'Communication & Resource Development', f:'<h3>Communication & Resource Development</h3>'}, 'Support', ''],
-          [{v:"Children's Services", f:"<h3>Children's Services</h3>"}, 'Support', ''],
+          [{v:'Finance', f:'<div id="finance"><h3>Finance</h3></div>'}, 'Support', ''],
+          [{v:'Social Innovation & Technology', f:'<div id="tech"><h3>Social Innovation & Technology</h3></div>'}, 'Support', ''],
+          [{v:'HR & Quality Assurance', f:'<div id="hr"><h3>HR & Quality Assurance</h3></div>'}, 'Support', ''],
+          [{v:'Communication & Resource Development', f:'<div id="comm"><h3>Communication & Resource Development</h3></div>'}, 'Support', ''],
+          [{v:"Children's Services", f:"<div id='children'><h3>Children's Services</h3></div>"}, 'Support', ''],
 
 
         ]);
@@ -75,7 +75,7 @@
         google.visualization.events.addListener(chart, 'ready', chartReady);
 
         function chartReady() {
-          document.getElementById("board").onclick = function() {
+          document.getElementById("nodesupport").onclick = function() {
             $("#directpic").hide();
             $("#org").hide();
             $("#supportpic").animate({
@@ -87,6 +87,22 @@
             $("#support").css('width','45%');
             $("#support").css('left','55%');
             $("#support").css('padding','50px');
+          };
+
+          document.getElementById("nodedirect").onclick = function() {
+            $("#supportpic").hide();
+            $("#org").hide();
+            $("#directpic").animate({
+              left:'0px',
+              width:'55%',
+            });
+            $("#direct").css('visibility','visible');
+            $("#direct").css('display','block');
+            $("#direct").css('height','100%');
+            $("#direct").css('width','45%');
+            $("#direct").css('left','55%');
+            $("#direct").css('padding','50px');
+
           };
         }
         chart.draw(data, {
@@ -180,7 +196,6 @@ Over the past twenty years, Richard has distinguished himself as a leader and in
         $("#direct").css('width','45%');
         $("#direct").css('left','55%');
         $("#direct").css('padding','50px');
-
       };
       document.getElementById("back1").onclick = function() {
         $("#directpic").show();
