@@ -11,271 +11,185 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+    <!-- Font Awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Jquery -->
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 
      <link href="css/main.css" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="css/animations.css">
+     <script type="text/javascript" src="css/chart.js"></script>
 
+     <!--Google Charts -->
+      <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["orgchart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('string', 'Manager');
+        data.addColumn('string', 'ToolTip');
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Name');
+        data2.addColumn('string', 'Manager');
+        data2.addColumn('string', 'ToolTip');
+        var data3 = new google.visualization.DataTable();
+        data3.addColumn('string', 'Name');
+        data3.addColumn('string', 'Manager');
+        data3.addColumn('string', 'ToolTip');
+        data.addRows([
+          [{v:'Membership', f:'<h2>Membership</h2><div style="font-style:italic">Board of Directors</div>'}, '', 'The President'],
+          [{v:'Support Services', f:'<h3>Support Services</h3><div id="nodesupport" style="font-style:italic">Tanya Sather<div>'}, 'Membership', ''],
+          [{v:'Direct Services', f:'<h3>Direct Services</h3><div id="nodedirect" style="font-style:italic">Richard Faucher<div>'}, 'Membership', ''],
+
+        ]);
+        data2.addRows([
+          [{v:'Support', f:'<h2>Support Services</h2><div style="font-style:italic"></div>'}, '', ''],
+          [{v:'Finance', f:'<h3>Finance</h3>'}, 'Support', ''],
+          [{v:'Social Innovation & Technology', f:'<h3>Social Innovation & Technology</h3>'}, 'Support', ''],
+          [{v:'HR & Quality Assurance', f:'<h3>HR & Quality Assurance</h3>'}, 'Support', ''],
+          [{v:'Communication & Resource Development', f:'<h3>Communication & Resource Development</h3>'}, 'Support', ''],
+          [{v:"Children's Services", f:"<h3>Children's Services</h3>"}, 'Support', ''],
+
+
+        ]);
+        data3.addRows([
+          [{v:'Direct', f:'<h2>Direct Services</h2><div style="font-style:italic"></div>'}, '', ''],
+          [{v:'BASA', f:'<h3>BASA</h3>'}, 'Direct', ''],
+          [{v:'Adult', f:'<h3>Adult Services</h3>'}, 'Direct', ''],
+          [{v:'Family', f:'<h3>Family Services</h3>'}, 'Direct', ''],
+          [{v:'Community', f:'<h3>Community Connectors</h3>'}, 'Direct', ''],
+          [{v:'Economic', f:'<h3>Economic Inclusion</h3>'}, 'Direct', ''],
+
+
+        ]);
+
+
+        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+        var chart2 = new google.visualization.OrgChart(document.getElementById('support_div'));
+        var chart3 = new google.visualization.OrgChart(document.getElementById('direct_div'));
     
+        chart.draw(data, {
+          allowHtml:true,
+          allowCollapse:true,
+          nodeClass:'customnode',
+          selectedNodeClass:'selectedcustom',});
+        chart2.draw(data2, {
+          allowHtml:true,
+          allowCollapse:true,
+          nodeClass:'customnode',
+          selectedNodeClass:'selectedcustom',});
+        chart3.draw(data3, {
+          allowHtml:true,
+          allowCollapse:true,
+          nodeClass:'customnode',
+          selectedNodeClass:'selectedcustom',});
+      }
+
+      
+   </script>
 </head>
 
 
 <body>
 
-  <div id="sample">
-        <h1>Tanya Sather, Executive Director</h1>
-        <br>
-        <br>
+<!-- Support Servicdes Column-->
 
- </div>
+  <div id="supportpic" class="noHover">
+  </div>
+  
+    <div id="support">
+      <div id="back1"><h2><button type="button" class="btn back1"><i class="fa fa-reply"></i> Back</button></div></h2>
 
-  <div id="sample_1">
-        <h1>Richard Faucher, Executive Director</h1>
+      <h1>Tanya Sather <small> <i class="fa fa-envelope"></i> <i class="fa fa-twitter"></i> </small></h1> 
+      <p>Tanya has worked for BACI since 1996. She started her journey with the Association as a casual employee in Day Services and was fortunate enough to also work in Residential Supports and Human Resources & Quality Assurance.</p>
 
+<p>Currently, she shares the Executive Director role with Richard Faucher (since April 2003). Tanya oversees the Support Services within the organization. Becoming the Executive Director and one of the leaders at BACI was one of her proudest accomplishments. Tanya strives to set an example of collaboration, respect, and commitment to BACI’s vision, mission, and values. She feels honoured not only to work with the individuals and families at BACI, but to share so many special and personal moments along the way.Tanya has a Bachelor of Arts in Political Science.</p>
+
+<p>Once she realized that working with people with disabilities was going to be a life-long commitment, she returned to school to complete a Masters of Education in Community Rehabilitation & Disability Studies (from the University of Calgary) with a specialization in Community Development.</p>
+
+         <div id="support_div"></div>
   </div>
 
-   <script>
-      document.getElementById("sample").onclick = function() {
-        this.addClass("stretchRight");
-        this.style.width = '90%';
-        sample_1.style.width ='10%';
-      }
+<!--Direct Services Column -->
+  <div id="directpic" class="noHover">
+  </div>
+    <div id="direct">
+         <div id="back2"><h2><button type="button" class="btn"><i class="fa fa-reply"></i> Back</button></div></h2>
+         <h1>Richard Faucher<small> <i class="fa fa-envelope"></i> <i class="fa fa-twitter"></i> </small></h1>
+           <p>
+Over the past twenty years, Richard has distinguished himself as a leader and innovator at the Burnaby Association for Community Inclusion (BACI). As a passionate advocate for the rights of people with disabilities, and more broadly for all people, Richard demonstrates the ethics, insight and integrity necessary to lead an organization that supports individuals in a community-driven and humanitarian way.</p>
 
-      document.getElementById("sample_1").onclick = function() {
-        this.style.width = '90%';
-        this.addClass('.stretchRight')
-        sample.style.width ='10%';
-      }
+<p>His vision, values and strategic thinking abilities have benefited not only BACI, but the broader Community Living movement as well. Richard’s commitment to finding new and creative ways to advance social inclusion is demonstrated through the array of initiatives he has organized – and the cross-sectoral partnerships he has built – regarding social finance and social innovation.</p>
+                <div id="direct_div"></div>
+    </div>
+
+<!--Main Page Column -->
+  <div id="org">
+            <h1>Our Organization</h1> 
+           <p>The Burnaby Association for Community Inclusion (BACI) was created in 1956, when parents of children with disabilities in Burnaby gathered to advocate for the rights of their sons and daughters. We have grown into a non-profit organization that provides innovative services to over 1,000 children, youth and adults with developmental disabilities and their families in Metro Vancouver.</p>
+
+<p>We provide a wide range of training, development, social, recreational and employment opportunities. Throughout BACI and in our social enterprises – Action Packaging and Yard ‘n Works – we support the employment (or economic inclusion) of people with disabilities.</p>
+             <div id="chart_div"></div>
+  </div>
+   <script>
+      document.getElementById("supportpic").onclick = function() {
+        $("#directpic").hide();
+        $("#org").hide();
+        $("#supportpic").animate({
+          width:'55%',
+        });
+        $("#support").css('visibility','visible');
+        $("#support").css('display','block');
+        $("#support").css('height','100%');
+        $("#support").css('width','45%');
+        $("#support").css('left','55%');
+        $("#support").css('padding','50px');
+      };
+      document.getElementById("directpic").onclick = function() {
+        $("#supportpic").hide();
+        $("#org").hide();
+        $("#directpic").animate({
+          left:'0px',
+          width:'55%',
+        });
+        $("#direct").css('visibility','visible');
+        $("#direct").css('display','block');
+        $("#direct").css('height','100%');
+        $("#direct").css('width','45%');
+        $("#direct").css('left','55%');
+        $("#direct").css('padding','50px');
+
+      };
+      document.getElementById("back1").onclick = function() {
+        $("#directpic").show();
+        $("#org").show();
+        $("#supportpic").animate({
+          width:'27%',
+        });
+        $("#support").css('visibility','hidden');
+        $("#support").css('display','none');
+
+      };
+
+      document.getElementById("back2").onclick = function() {
+        $("#supportpic").show();
+        $("#org").show();
+        $("#directpic").animate({
+          left:'50%',
+          width:'27%',
+        });
+        $("#direct").css('visibility','hidden');
+        $("#direct").css('display','none');
+
+      };
       
  </script>
 
-
-
-
-
-
-
- <!-- <div class="tanya" style= "background-color: blue; padding: 10px; color: white; ">
-    
-       <h2>Support Services</h2>
-       <h4>Tanya Sather, Executive Director</h4>
-     </span>
-  </div>
-
-  <div class="richard" style= "background-color: green; padding: 10px; color: white; ">
-    <span>
-      <h2>DirectServices</h2>
-      <h4>Richard Faucher, Executive Director</h4>
-    </span>
-  </div>
--->
-
-
-<!--
-<div class="container">
-    <div class="row">
-
-      <div class="col-md-2" class="idp">
-
-        <button type="button" style = "background-color: #00CCFF;">Children & Family Services</button>
-<br>
-<br>
-          <ul>
-            <li>Krista Moldowan, <i>Senior Manager</i></li>
-              <ul>
-                <h4>Infant Development Progran & Children's Respite</h4>
-                <li>Jen Ghioda, <i>Manager</i></li>
-                  <ul>
-                    <h5>Infant Development Consultants</h5>
-                    <li>Maria Rencoret</li>
-                    <li>Tara Smith</li>
-                    <li>Christine Ondang</li>
-                    <li>Shannon Renning</li>
-                    <li>Daya McIntosh</li>
-                    <li>Julia Hart</li>
-                    <li>Rachel Goldstein</li>
-                  </ul>
-              </ul>
-          </ul>
-      </div>
-      <div class="col-md-2" class="cildren_service">
-
-         <button type="button" style = "background-color: #00CC66;">Children Services Supervisors</button>
-        
-        <br>
-        <br>
-          <ul>
-            <li>Chrisa Aiteur</li>
-            <li>Lesley Cannon</li>
-            <li>Carly Neville</li>
-            <li>Moira Stubbs</li>
-          </ul>
- 
-        </div>
-        <div class="col-md-2"  class="communications">
-          <button type="button" style = "background-color: #FF9933">Communications & Resource Development</button>
-        
-        <br>
-<br>
-          <ul>
-            <li>Carol Broomhall, <i>Senior Manager</i></li>
-            <ul>
-              <h4>Administration Support Staff</h4>
-              <li>Kam Bhatti</li>
-              <li>Christina Tomingas</li>
-            </ul> 
-          </ul>
-        </div>
-
-
-        <div class="col-md-2" class="tech">
-        <h3>Social Innovation & Technology</h3>
-        <br>
-<br>
-          <ul>
-            <li>Lisa Joy Trick, <i>Senior Manager</i></li>
-            <ul>
-              <h4>Technology </h4>
-              <li>Derik Ng, <i>Manager</i></li>
-              
-            </ul> 
-          </ul>
-        </div>
-
-        <div class="col-md-2" class="finance" >
-        <h3>Finance</h3>
-        <br>
-<br>
-          <ul>
-            <li>Peter Kerr, <i>Senior Manager</i></li>
-            <ul>
-              <h4>Finance Staff</h4>
-              <li>Lilian Shih</li>
-              <li>Rosalind Ho</li>
-
-              <h4>Payroll & Benefits</h4>
-              <li>Anna Penn, <i>Manager</i></li>
-                <ul>
-                  <h5>Payroll Assistant</h5>
-                  <li>TBD</li>
-                </ul>
-                <h4>Accounts Payable</h4>
-                <li>Pin Su, <i>Administrator</i></li>
-              
-            </ul> 
-          </ul>
-        </div>
-
-         <div class="col-md-2" class="hr">
-        <h3>HR & Quality Services</h3>
-        <br>
-<br>
-          <ul>
-            <li>Lisa Thomson, <i>Senior Manager</i></li>
-            <li>Barb Trippel, <i>Senior Manager</i></li>
-            <li>Lyn King, <i>Senior Manager</i></li>
-            <ul>
-              <h4>Outreach Coordinator</h4>
-              <li>Lyn King</li>
-
-            </ul>
-              
-            
-          </ul>
-        </div>
-
-   </div>
-  </div>
--->
-  
-
-
-    <!--<div class="content">
-      <h1>Responsive Organization Chart</h1>
-      <figure class="org-chart cf">
-        <ul class="administration">
-          <li>          
-            <ul class="director">
-              <li>
-                <a href="#"><span>Executive Director</span></a>
-                <ul class="subdirector">
-                  <li><a href="#"><span>Assistante Director</span></a></li>
-                </ul>
-
-                <ul class="departments cf">               
-                  <li><a href="#"><span>Administration</span></a></li>
-                  
-                  <li class="department dep-a">
-                    <a href="#"><span>Children & Family Services</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Krista Moldowan, Senior Manager</span></a></li>
-                        <ul>
-                          <li><a href="#">Jen Ghioda, Manager: Infant Development Program</a></li>
-                        </ul>
-                      <li class="section"><a href="#"><span>Section A2</span></a></li>
-                      <li class="section"><a href="#"><span>Section A3</span></a></li>
-                      <li class="section"><a href="#"><span>Section A4</span></a></li>
-                      <li class="section"><a href="#"><span>Section A5</span></a></li>
-                    </ul>
-                  </li>
-
-                  <li class="department dep-b">
-                    <a href="#"><span>Children's Services</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Section B1</span></a></li>
-                      <li class="section"><a href="#"><span>Section B2</span></a></li>
-                      <li class="section"><a href="#"><span>Section B3</span></a></li>
-                      <li class="section"><a href="#"><span>Section B4</span></a></li>
-                    </ul>
-                  </li>
-
-                  <li class="department dep-c">
-                    <a href="#"><span>Communications & Resource Development</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Section C1</span></a></li>
-                      <li class="section"><a href="#"><span>Section C2</span></a></li>
-                      <li class="section"><a href="#"><span>Section C3</span></a></li>
-                      <li class="section"><a href="#"><span>Section C4</span></a></li>
-                    </ul>
-                  </li>
-
-                  <li class="department dep-d">
-                    <a href="#"><span>Social Innovation & Technology</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Section D1</span></a></li>
-                      <li class="section"><a href="#"><span>Section D2</span></a></li>
-                      <li class="section"><a href="#"><span>Section D3</span></a></li>
-                      <li class="section"><a href="#"><span>Section D4</span></a></li>
-                      <li class="section"><a href="#"><span>Section D5</span></a></li>
-                      <li class="section"><a href="#"><span>Section D6</span></a></li>
-                    </ul>
-                  </li>
-
-                  <li class="department dep-e">
-                    <a href="#"><span>Finance</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Section E1</span></a></li>
-                      <li class="section"><a href="#"><span>Section E2</span></a></li>
-                      <li class="section"><a href="#"><span>Section E3</span></a></li>
-                    </ul>
-                  </li>
-
-                  <li class="department dep-f">
-                    <a href="#"><span>HR & Quality Services</span></a>
-                    <ul class="sections">
-                      <li class="section"><a href="#"><span>Section E1</span></a></li>
-                      <li class="section"><a href="#"><span>Section E2</span></a></li>
-                      <li class="section"><a href="#"><span>Section E3</span></a></li>
-                    </ul>
-                  </li>
-
-                </ul>
-              </li>
-            </ul> 
-          </li>
-        </ul>     
-      </figure>
-    </div>-->
 </body>
+<script>
+
 </html>
