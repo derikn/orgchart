@@ -41,7 +41,7 @@
         data3.addColumn('string', 'Manager');
         data3.addColumn('string', 'ToolTip');
         data.addRows([
-          [{v:'Membership', f:'<h2>Membership</h2><div style="font-style:italic">Board of Directors</div>'}, '', 'The President'],
+          [{v:'Membership', f:'<h2>Membership</h2><div id="board" style="font-style:italic">Board of Directors</div>'}, '', 'The President'],
           [{v:'Support Services', f:'<h3>Support Services</h3><div id="nodesupport" style="font-style:italic">Tanya Sather<div>'}, 'Membership', ''],
           [{v:'Direct Services', f:'<h3>Direct Services</h3><div id="nodedirect" style="font-style:italic">Richard Faucher<div>'}, 'Membership', ''],
 
@@ -71,7 +71,24 @@
         var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
         var chart2 = new google.visualization.OrgChart(document.getElementById('support_div'));
         var chart3 = new google.visualization.OrgChart(document.getElementById('direct_div'));
-    
+        
+        google.visualization.events.addListener(chart, 'ready', chartReady);
+
+        function chartReady() {
+          document.getElementById("board").onclick = function() {
+            $("#directpic").hide();
+            $("#org").hide();
+            $("#supportpic").animate({
+              width:'55%',
+            });
+            $("#support").css('visibility','visible');
+            $("#support").css('display','block');
+            $("#support").css('height','100%');
+            $("#support").css('width','45%');
+            $("#support").css('left','55%');
+            $("#support").css('padding','50px');
+          };
+        }
         chart.draw(data, {
           allowHtml:true,
           allowCollapse:true,
@@ -79,17 +96,18 @@
           selectedNodeClass:'selectedcustom',});
         chart2.draw(data2, {
           allowHtml:true,
-          allowCollapse:true,
+           allowCollapse:true,
           nodeClass:'customnode',
           selectedNodeClass:'selectedcustom',});
         chart3.draw(data3, {
           allowHtml:true,
-          allowCollapse:true,
+           allowCollapse:true,
           nodeClass:'customnode',
           selectedNodeClass:'selectedcustom',});
+
+        
       }
 
-      
    </script>
 </head>
 

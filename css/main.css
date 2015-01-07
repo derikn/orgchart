@@ -1,6 +1,7 @@
 /*CSS Style sheet*/
 
 #supportpic {
+	cursor: pointer;
     float: left;
     height: 100%;
     width: 27%;
@@ -45,6 +46,10 @@ ul.contact {
   border: solid #666 1px;
   text-decoration: none;
 }
+
+.customnode {
+	cursor: pointer;
+}
 #support {
 	float:left;
 	visibility: hidden;
@@ -66,6 +71,7 @@ ul.contact {
     height: 0px;
 }
 #directpic {
+	cursor: pointer;
 	float: left;
 	height: 100%;
     width: 27%;
