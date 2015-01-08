@@ -1,6 +1,12 @@
 /*CSS Style sheet*/
 
 #supportpic {
+	-webkit-transition: background 3s ease-out;
+    -moz-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s ease-out;
+
+
 	cursor: pointer;
     float: left;
     height: 100%;
@@ -22,6 +28,9 @@
 	margin-top: -45px;
 }
 
+#finance_div{
+	display:none;
+}
 ul.contact {
 	visibility: hidden;
 	display; none;
@@ -49,6 +58,11 @@ ul.contact {
 
 #nodesupport,#nodedirect,#finance,#tech,#hr,#comm,#children{
 	cursor: pointer;
+}
+.customnode:hover {
+	font-style:italic;
+	color:#666;	
+	cursor:pointer;
 }
 #support {
 	float:left;

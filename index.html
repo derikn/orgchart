@@ -41,6 +41,11 @@
         data3.addColumn('string', 'Name');
         data3.addColumn('string', 'Manager');
         data3.addColumn('string', 'ToolTip');
+        var data4 = new google.visualization.DataTable();
+        data4.addColumn('string', 'Name');
+        data4.addColumn('string', 'Manager');
+        data4.addColumn('string', 'ToolTip');
+
         data.addRows([
           [{v:'Membership', f:'<h2>Membership</h2><div style="font-style:italic">Board of Directors</div>'}, '', ''],
           [{v:'Support Services', f:'<h3>Support Services</h3><div id="nodesupport" style="font-style:italic">Tanya Sather<div>'}, 'Membership', ''],
@@ -53,8 +58,6 @@
           [{v:'HR & Quality Assurance', f:'<div id="hr"><h3>HR & Quality Assurance</h3></div>'}, 'Support', ''],
           [{v:'Communication & Resource Development', f:'<div id="comm"><h3>Communication & Resource Development</h3></div>'}, 'Support', ''],
           [{v:"Children's Services", f:"<div id='children'><h3>Children's Services</h3></div>"}, 'Support', ''],
-
-
         ]);
         data3.addRows([
           [{v:'Direct', f:'<h2>Direct Services</h2><div style="font-style:italic"></div>'}, '', ''],
@@ -67,12 +70,21 @@
 
         ]);
 
+        data4.addRows([
+          [{v:'Finance', f:'<h2>Finance</h2><div style="font-style:italic"></div>'}, '', ''],
+          [{v:'Payroll', f:'<h3>Payroll & Benefits</h3>'}, 'Finance', ''],
+          [{v:'Accounts Payable', f:'<h3>Accounts Payable</h3>'}, 'Finance', ''],
+          [{v:'Information Security', f:'<h3>Information Security</h3>'}, 'Finance', ''],
+        ]);
+
 
         var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
         var chart2 = new google.visualization.OrgChart(document.getElementById('support_div'));
         var chart3 = new google.visualization.OrgChart(document.getElementById('direct_div'));
-        
+        var chart4 = new google.visualization.OrgChart(document.getElementById('finance_div'));
+
         google.visualization.events.addListener(chart, 'ready', chartReady);
+        google.visualization.events.addListener(chart2, 'ready', supportChartReady);
 
         function chartReady() {
           document.getElementById("nodesupport").onclick = function() {
@@ -104,6 +116,18 @@
             $("#direct").css('padding','50px');
 
           };
+
+        }
+
+        function supportChartReady() {
+          document.getElementById("finance").onclick = function() {
+            $('#support_div').hide();
+            $('#finance_div').fadeIn();
+            $('#supportpic').css('backgroundImage','url("/org/img/peter.jpg")');
+            $.ajax({url:"finance.html",success:function(result){
+               $("#supportbody").hide().html(result).fadeIn();
+            }});
+          };
         }
         chart.draw(data, {
           allowHtml:true,
@@ -120,7 +144,11 @@
            allowCollapse:true,
           nodeClass:'customnode',
           selectedNodeClass:'selectedcustom',});
-
+        chart4.draw(data4, {
+          allowHtml:true,
+           allowCollapse:true,
+          nodeClass:'customnode',
+          selectedNodeClass:'selectedcustom',});
         
       }
 
@@ -137,15 +165,17 @@
   
     <div id="support">
       <div id="back1"><h2><button type="button" class="btn back1"><i class="fa fa-reply"></i> Back</button></div></h2>
-
+    <div id="supportbody">
       <h1>Tanya Sather <small> <i class="fa fa-envelope"></i> <i class="fa fa-twitter"></i> </small></h1> 
+
       <p>Tanya has worked for BACI since 1996. She started her journey with the Association as a casual employee in Day Services and was fortunate enough to also work in Residential Supports and Human Resources & Quality Assurance.</p>
 
 <p>Currently, she shares the Executive Director role with Richard Faucher (since April 2003). Tanya oversees the Support Services within the organization. Becoming the Executive Director and one of the leaders at BACI was one of her proudest accomplishments. Tanya strives to set an example of collaboration, respect, and commitment to BACI’s vision, mission, and values. She feels honoured not only to work with the individuals and families at BACI, but to share so many special and personal moments along the way.Tanya has a Bachelor of Arts in Political Science.</p>
 
 <p>Once she realized that working with people with disabilities was going to be a life-long commitment, she returned to school to complete a Masters of Education in Community Rehabilitation & Disability Studies (from the University of Calgary) with a specialization in Community Development.</p>
-
-         <div id="support_div"></div>
+  </div>
+            <div id="support_div"></div>
+            <div id="finance_div"></div>
   </div>
 
 <!--Direct Services Column -->
@@ -198,6 +228,10 @@ Over the past twenty years, Richard has distinguished himself as a leader and in
         $("#direct").css('padding','50px');
       };
       document.getElementById("back1").onclick = function() {
+        $.ajax({url:"tanya.html",success:function(result){
+               $("#supportbody").html(result).fadeIn();
+            }});
+        $('#supportpic').css('backgroundImage','url("/org/img/tanya2.jpg")');
         $("#directpic").show();
         $("#org").show();
         $("#supportpic").animate({
@@ -205,10 +239,13 @@ Over the past twenty years, Richard has distinguished himself as a leader and in
         });
         $("#support").css('visibility','hidden');
         $("#support").css('display','none');
+        $('#support_div').fadeIn();
+        $('#finance_div').hide();
 
       };
 
       document.getElementById("back2").onclick = function() {
+        $('#directpic').css('backgroundImage','url("/org/img/richard2.jpg")');
         $("#supportpic").show();
         $("#org").show();
         $("#directpic").animate({
